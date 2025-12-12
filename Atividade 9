@@ -1,0 +1,76 @@
+create database clinicaMedicaDb;
+
+use clinicaMedicaDB;
+
+create table medico(
+	crm int primary key,
+    nome varchar(50),
+    email varchar(20),
+    telefone varchar(30),
+    data_nasc date,
+    especializacao varchar(25)
+    check (especializacao in ('cardiologista', 'nutricionista'))
+	);
+    
+create table paciente(
+		id int primary key,
+        cpf int,
+        nome varchar(100),
+        endereco varchar(75),
+        telefone varchar(35),
+		data_nasc date,
+        tipo_exame varchar(25)
+        check (tipo_exame in ('laboratorio', 'clinico'))
+        );
+
+create table consulta (
+	id_medico int,
+    id_paciente int,
+    foreign key (id_medico) references medico (crm),
+    foreign key (id_paciente) references paciente (id),
+    data_consult date,
+    valor double,
+    tipo_pag varchar(20)
+);
+
+insert into medico( crm, nome, email, telefone, data_nasc, especializacao)
+values
+(3233, 'Jose Kayo', 'josekayo@gmail.com','93101213', '1980-09-22', 'cardiologista'),
+(2344, 'Djalma Guedes', 'djalms@gmail.com', '93151718', '1970-03-23', 'nutricionista'),
+(3321, 'Maria Antonia', 'maria@gmail.com', '93151718', '1990-02-15', 'cardilogista');
+
+alter table medico
+drop check medico_chk_1;
+
+insert into paciente (id, cpf, nome, endereco, telefone, data_nasc, tipo_exame)
+values
+(3322, '39723455', 'Antonio', 'rua padre cicero', '33941010', '1999-02-22', 'cardiologista'),
+(2234, '33245677', 'Jose', 'rua maciel pinheiro', '33442233', '1980-03-21', 'nutricionista'),
+(3214, '33221213', 'Maria', 'rua jose pinheiro', '32421213', '1890-02-22', 'cardiologista'),
+(1415, '32452121', 'Alan', 'rua virgulino de souza', '33445671', '1989-03-21', 'nutricionista'),
+(2721, '33552123', 'David', 'rua antonio de freitas', '34562321', '1997-04-22', 'cardiologista');
+
+alter table paciente
+drop check paciente_chk_1;
+
+insert into consulta (id_medico, id_paciente, data_consult, valor, tipo_pag)
+values
+(3233, 2234, '2025-03-22', '50', 'credito'),
+(2344, 1415, '2025-11-10', '80', 'debito'),
+(3233, 3214, '2025-02-10', '70', 'dinheiro'),
+(3321, 2721, '2025-01-28', '100', 'credito'),
+(2344, 3322, '2025-04-21', '90', 'credito');
+
+delete from consulta
+where id_paciente = 2721;
+select *from consulta;
+
+delete from paciente
+where id = 2721;
+
+select *from paciente;
+
+select nome, especializacao from medico;
+
+select *from consulta
+where id_medico = 2344;
