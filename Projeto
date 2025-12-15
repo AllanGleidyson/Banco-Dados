@@ -1,0 +1,59 @@
+/*criando banco de dados*/
+create database SGE;
+
+/*usando banco de dados*/
+use SGE;
+
+/*criando a primeira tabela*/
+create table alunos(
+	id_aluno int auto_increment primary key,
+    nome varchar(100),
+    data_nsc date
+);
+
+/*adicionando coluna na primeira tabela*/
+alter table alunos
+add column email varchar(50);
+
+create table cursos(
+	id_curso int auto_increment primary key,
+    nome_curso varchar(75),
+    carga_horaria int,
+    disciplinas varchar(75),
+    horarios datetime
+);
+
+/*adicionando coluna na segunda tabela*/
+alter table cursos
+add column preco decimal(10,2);
+
+
+alter table alunos
+add column id_curso int;
+
+alter table alunos
+add constraint fk_alunos_curso
+foreign key (id_curso) references cursos(id_curso); 
+
+insert into cursos (nome_curso, carga_horaria, disciplinas, horarios, preco)
+values
+('matemática', '20', 'algebra', '2022-02-12', 200 ),
+('engenharia', '30', 'matemática', '2023-10-04', 150),
+('medicina', '50', 'biologia', '2024-03-22', 500);
+
+alter table cursos
+modify column horarios date;
+
+insert into alunos(nome, data_nsc, email)
+values
+('Jose', '1991-10-12', 'jose@gmail.com'),
+('Maria', '1990-09-12', 'maria@gmail.com'),
+('Daniel', '1992-03-15', 'daniel@gmail.com');
+
+create table professores 
+	
+	
+
+
+
+
