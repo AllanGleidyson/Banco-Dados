@@ -50,10 +50,36 @@ values
 ('Maria', '1990-09-12', 'maria@gmail.com'),
 ('Daniel', '1992-03-15', 'daniel@gmail.com');
 
-create table professores 
+create table professores ( 
+	id_professor int auto_increment primary key,
+    nome varchar(70),
+    nome_curso varchar(80),
+    data_admi date
+);
+    
+insert into professores (nome, nome_curso, data_admi)
+values
+('Arimateia', 'Biologia', '2023-08-22'),
+('katia', 'Historia', '2024-03-15'),
+('Valtenir', 'Quimica', '2023-09-23');
 	
-	
+create table coordenadores(
+	id_coordenador int auto_increment primary key,
+    nome varchar (60),
+    nome_coordenacao varchar(60),
+    carga_horaria int
+);
 
+insert into coordenadores (nome, nome_coordenacao, carga_horaria)
+values
+('Eduardo', 'Pedagógica', '30'),
+('Mariana', 'Finaceiro', '20'),
+('Wilma', 'Orinetador Educacional', '40');
+
+select *from coordenadores; 
+
+select *from professores
+where id_professor = 2
 
 
 
